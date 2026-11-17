@@ -11,6 +11,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
+use Filament\View\PanelsRenderHook;
 use Filament\PanelProvider;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -40,6 +41,21 @@ class AdminPanelProvider extends PanelProvider
         950 => 'oklch(0.19 0.02 40)',
     ];
 
+    /** Warm greys taken from the store's sand and taupe, instead of Filament's cold slate. */
+    private const SAND = [
+        50 => '#fbf8f1',
+        100 => '#f4eee2',
+        200 => '#e8dfcf',
+        300 => '#d6cab6',
+        400 => '#b3a693',
+        500 => '#8e8172',
+        600 => '#6f6357',
+        700 => '#574c43',
+        800 => '#3f3631',
+        900 => '#2e2723',
+        950 => '#1d1815',
+    ];
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -48,15 +64,18 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName(fn (): string => __('admin.brand'))
-            ->brandLogo(fn (): string => asset('assets/img/brand/logo-walnut.png'))
-            ->brandLogoHeight('3rem')
+            ->brandLogo(fn () => view('filament.brand'))
+            ->brandLogoHeight('2.75rem')
             ->favicon(fn (): string => asset('assets/img/brand/favicon.png'))
             ->font('Tajawal')
             ->defaultAvatarProvider(InitialAvatar::class)
             ->darkMode(false)
             ->colors([
                 'primary' => self::WALNUT,
+                'gray' => self::SAND,
             ])
+            ->renderHook(PanelsRenderHook::HEAD_END, fn () => view('filament.head'))
+            ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
                 NavigationGroup::make(fn (): string => __('admin.nav.sales')),
                 NavigationGroup::make(fn (): string => __('admin.nav.catalog')),

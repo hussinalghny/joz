@@ -1,0 +1,283 @@
+/* ==========================================================================
+   Joz Gallery admin theme
+   Plain CSS on top of Filament's own theme. Filament puts its rules in
+   cascade layers, so these unlayered rules win without !important.
+   Palette and radii match resources/css/storefront.css.
+   ========================================================================== */
+
+:root {
+  --joz-walnut: #5b3e34;
+  --joz-walnut-ink: #3e2a23;
+  --joz-walnut-deep: #2f201b;
+  --joz-sage: #adb785;
+  --joz-sage-ink: #5d683a;
+  --joz-cream: #f8f3e0;
+  --joz-paper: #fffdf7;
+  --joz-sand: #efe6d6;
+  --joz-text: #3b2a24;
+  --joz-muted: #806c63;
+  --joz-line: rgba(91, 62, 52, .13);
+  --joz-r-lg: 22px;
+  --joz-r-md: 16px;
+  --joz-r-sm: 12px;
+  --joz-shadow: 0 1px 2px rgba(59, 42, 36, .04), 0 8px 24px -12px rgba(59, 42, 36, .18);
+  --joz-display: "Amiri", "Tajawal", serif;
+}
+
+/* ---------- Page ---------- */
+
+.fi-body {
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(173, 183, 133, .18), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(91, 62, 52, .08), transparent 60%),
+    var(--joz-cream);
+  background-attachment: fixed;
+  color: var(--joz-text);
+}
+
+.fi-header-heading,
+.fi-simple-header-heading {
+  font-family: var(--joz-display);
+  font-weight: 700;
+  color: var(--joz-walnut-ink);
+  letter-spacing: 0;
+}
+
+.fi-header-heading { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); }
+
+.fi-header-subheading,
+.fi-simple-header-subheading { color: var(--joz-muted); }
+
+.fi-breadcrumbs a,
+.fi-breadcrumbs span { color: var(--joz-muted); }
+
+/* ---------- Sidebar ---------- */
+
+.fi-sidebar,
+.fi-sidebar-header {
+  background: linear-gradient(180deg, var(--joz-walnut-ink) 0%, var(--joz-walnut-deep) 100%);
+  box-shadow: none;
+}
+
+.fi-sidebar { border-inline-end: 1px solid rgba(248, 243, 224, .06); }
+
+.fi-sidebar-header { border-bottom: 1px solid rgba(248, 243, 224, .08); }
+
+.fi-sidebar-nav { padding-block: 1.25rem; }
+
+.fi-sidebar-group-label,
+.fi-sidebar-group-btn,
+.fi-sidebar-group-collapse-btn {
+  color: rgba(248, 243, 224, .45);
+}
+
+.fi-sidebar-group-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.fi-sidebar-item-btn {
+  border-radius: var(--joz-r-sm);
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.fi-sidebar-item-btn,
+.fi-sidebar-item-label,
+.fi-sidebar-item-btn > .fi-icon {
+  color: rgba(248, 243, 224, .78);
+}
+
+.fi-sidebar-item-btn:hover,
+.fi-sidebar-item-btn:focus-visible {
+  background-color: rgba(248, 243, 224, .08);
+}
+
+.fi-sidebar-item-btn:hover .fi-sidebar-item-label,
+.fi-sidebar-item-btn:hover > .fi-icon { color: var(--joz-cream); }
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+  background-color: var(--joz-cream);
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .5);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+  color: var(--joz-walnut-ink);
+  font-weight: 700;
+}
+
+.fi-sidebar-item-grouped-border-part { background-color: rgba(248, 243, 224, .2); }
+
+.fi-sidebar-footer,
+.fi-sidebar-database-notifications-btn { color: rgba(248, 243, 224, .78); }
+
+/* Two logos: cream on the dark sidebar, walnut everywhere else. */
+.joz-logo { display: flex; align-items: center; }
+.joz-logo img { height: 2.75rem; width: auto; }
+.joz-logo-cream { display: none !important; }
+.fi-sidebar .joz-logo-cream { display: block !important; }
+.fi-sidebar .joz-logo-walnut { display: none !important; }
+
+/* ---------- Topbar ---------- */
+
+.fi-topbar {
+  background-color: rgba(255, 253, 247, .72);
+  backdrop-filter: saturate(1.2) blur(14px);
+  -webkit-backdrop-filter: saturate(1.2) blur(14px);
+  box-shadow: none;
+  border-bottom: 1px solid var(--joz-line);
+}
+
+.fi-global-search .fi-input-wrp { border-radius: 999px; }
+
+/* ---------- Cards: sections, tables, widgets ---------- */
+
+.fi-section:not(.fi-section-not-contained),
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat,
+.fi-wi-chart,
+.fi-fo-tabs,
+.fi-in-tabs {
+  background-color: var(--joz-paper);
+  border-radius: var(--joz-r-lg);
+  box-shadow: var(--joz-shadow);
+  --tw-ring-color: var(--joz-line);
+}
+
+.fi-section-header-heading {
+  font-weight: 700;
+  color: var(--joz-walnut-ink);
+}
+
+.fi-section-header-description { color: var(--joz-muted); }
+
+.fi-section:not(.fi-section-not-contained) > .fi-section-header { border-bottom: 1px solid var(--joz-line); }
+
+/* Stats */
+.fi-wi-stats-overview-stat { position: relative; overflow: hidden; }
+
+.fi-wi-stats-overview-stat::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 18px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--joz-sage);
+}
+
+.fi-wi-stats-overview-stat-label { color: var(--joz-muted); font-weight: 600; }
+
+.fi-wi-stats-overview-stat-value {
+  font-family: var(--joz-display);
+  color: var(--joz-walnut-ink);
+  font-weight: 700;
+}
+
+/* Tables */
+.fi-ta-header { border-bottom: 1px solid var(--joz-line); }
+
+.fi-ta-header-heading {
+  font-family: var(--joz-display);
+  color: var(--joz-walnut-ink);
+}
+
+.fi-ta-table > thead > tr,
+.fi-ta-header-cell {
+  background-color: var(--joz-sand);
+}
+
+.fi-ta-header-cell,
+.fi-ta-header-cell-sort-btn {
+  color: var(--joz-walnut);
+  font-weight: 700;
+}
+
+.fi-ta-row { transition: background-color .12s ease; }
+.fi-ta-row:hover { background-color: rgba(239, 230, 214, .45); }
+
+.fi-ta-table > tbody,
+.fi-ta-table > tbody > tr { border-color: var(--joz-line); }
+
+.fi-ta-image img { border-radius: 10px; }
+
+.fi-ta-empty-state-icon-bg { background-color: var(--joz-sand); }
+.fi-ta-empty-state-heading { color: var(--joz-walnut-ink); }
+
+/* ---------- Buttons, badges, inputs ---------- */
+
+.fi-btn { border-radius: 999px; font-weight: 700; }
+
+.fi-btn.fi-color-primary:not(.fi-outlined) {
+  background: linear-gradient(180deg, #6a4a3f 0%, var(--joz-walnut) 100%);
+  box-shadow: 0 6px 16px -8px rgba(91, 62, 52, .7);
+}
+
+.fi-btn.fi-color-primary:not(.fi-outlined):hover {
+  background: linear-gradient(180deg, var(--joz-walnut) 0%, var(--joz-walnut-ink) 100%);
+}
+
+.fi-badge { border-radius: 999px; }
+
+.fi-input-wrp {
+  background-color: #fff;
+  border-radius: var(--joz-r-sm);
+  --tw-ring-color: rgba(91, 62, 52, .18);
+}
+
+.fi-input-wrp:focus-within { --tw-ring-color: var(--joz-walnut); }
+
+.fi-fo-field-label-content { color: var(--joz-walnut-ink); font-weight: 600; }
+
+/* Tabs */
+.fi-tabs {
+  background-color: var(--joz-paper);
+  border-radius: 999px;
+  --tw-ring-color: var(--joz-line);
+}
+
+.fi-tabs-item { border-radius: 999px; }
+.fi-tabs-item.fi-active { background-color: var(--joz-walnut); }
+.fi-tabs-item.fi-active .fi-tabs-item-label,
+.fi-tabs-item.fi-active .fi-icon { color: var(--joz-cream); }
+
+/* Dropdowns and modals */
+.fi-dropdown-panel,
+.fi-modal-window {
+  background-color: var(--joz-paper);
+  border-radius: var(--joz-r-md);
+}
+
+.fi-modal-heading { font-family: var(--joz-display); color: var(--joz-walnut-ink); }
+
+/* Pagination */
+.fi-pagination-item-btn { border-radius: 10px; }
+.fi-pagination-item.fi-active .fi-pagination-item-btn { background-color: var(--joz-walnut); }
+.fi-pagination-item.fi-active .fi-pagination-item-label { color: var(--joz-cream); }
+
+/* ---------- Login ---------- */
+
+.fi-simple-layout {
+  justify-content: center;
+  background:
+    linear-gradient(rgba(47, 32, 27, .72), rgba(47, 32, 27, .86)),
+    url("../img/welcome/poster-wide.webp") center / cover no-repeat fixed,
+    var(--joz-walnut-deep);
+}
+
+.fi-simple-main {
+  background-color: var(--joz-paper);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .65);
+  --tw-ring-color: rgba(248, 243, 224, .1);
+}
+
+.fi-simple-header .fi-logo { height: 4rem !important; }
+.fi-simple-header .joz-logo img { height: 4rem; }
+
+.fi-simple-main .fi-btn { width: 100%; padding-block: .75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fi-sidebar-item-btn, .fi-ta-row { transition: none; }
+}

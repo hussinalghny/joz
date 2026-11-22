@@ -16,12 +16,12 @@
   <main id="main" class="welcome">
     <div class="welcome__media" aria-hidden="true">
       <picture>
-        <source media="(orientation: portrait)" srcset="{{ asset('assets/img/welcome/poster-portrait.webp') }}">
-        <img class="welcome__poster" src="{{ asset('assets/img/welcome/poster-wide.webp') }}" alt="" width="1600" height="900" fetchpriority="high">
+        <source media="(orientation: portrait)" srcset="{{ site_media('landing_poster_portrait') }}">
+        <img class="welcome__poster" src="{{ site_media('landing_poster_wide') }}" alt="" width="1600" height="900" fetchpriority="high">
       </picture>
       <video class="welcome__video" muted loop playsinline preload="none" data-welcome-video
-             data-portrait="{{ asset('assets/video/landing-portrait.mp4') }}"
-             data-wide="{{ asset('assets/video/landing-wide.mp4') }}"></video>
+             data-portrait="{{ site_media('landing_video_portrait') }}"
+             data-wide="{{ site_media('landing_video_wide') }}"></video>
     </div>
 
     <div class="welcome__top">

@@ -199,6 +199,7 @@ return [
         'apply' => 'تطبيق',
         'clear' => 'مسح الكل',
         'sort' => 'ترتيب حسب',
+        'sort_featured' => 'ترتيبنا',
         'sort_newest' => 'الأحدث',
         'sort_price_asc' => 'السعر: من الأقل',
         'sort_price_desc' => 'السعر: من الأعلى',

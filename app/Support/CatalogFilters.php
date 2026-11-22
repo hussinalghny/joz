@@ -7,6 +7,9 @@ use Illuminate\Support\Arr;
 
 class CatalogFilters
 {
+    /** The order the owner arranged in the admin. */
+    public const SORT_FEATURED = 'featured';
+
     public const SORT_NEWEST = 'newest';
 
     public const SORT_PRICE_ASC = 'price_asc';
@@ -15,7 +18,7 @@ class CatalogFilters
 
     public const SORT_BEST_SELLING = 'best_selling';
 
-    public const SORTS = [self::SORT_NEWEST, self::SORT_PRICE_ASC, self::SORT_PRICE_DESC, self::SORT_BEST_SELLING];
+    public const SORTS = [self::SORT_FEATURED, self::SORT_NEWEST, self::SORT_PRICE_ASC, self::SORT_PRICE_DESC, self::SORT_BEST_SELLING];
 
     /**
      * @param  list<string>  $colors
@@ -26,7 +29,7 @@ class CatalogFilters
         public readonly ?int $max = null,
         public readonly array $colors = [],
         public readonly array $materials = [],
-        public readonly string $sort = self::SORT_NEWEST,
+        public readonly string $sort = self::SORT_FEATURED,
     ) {}
 
     /**
@@ -42,7 +45,7 @@ class CatalogFilters
             max: self::amount($request->query('max')),
             colors: self::strings($request->query('color')),
             materials: self::strings($request->query('material')),
-            sort: in_array($sort, self::SORTS, true) ? $sort : self::SORT_NEWEST,
+            sort: in_array($sort, self::SORTS, true) ? $sort : self::SORT_FEATURED,
         );
     }
 

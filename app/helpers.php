@@ -88,3 +88,13 @@ if (! function_exists('whatsapp_url')) {
         return $url.'?text='.rawurlencode($message ?? __('shop.whatsapp.greeting'));
     }
 }
+
+if (! function_exists('site_media')) {
+    /**
+     * URL of a picture or video the owner can replace from the admin panel.
+     */
+    function site_media(string $slot): string
+    {
+        return \App\Support\SiteContent::mediaUrl($slot);
+    }
+}

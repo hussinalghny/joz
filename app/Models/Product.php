@@ -22,7 +22,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
     'category_id', 'name_ar', 'name_en', 'slug', 'description_ar', 'description_en',
     'price', 'stock', 'sku', 'material_ar', 'material_en', 'color_ar', 'color_en',
     'width_cm', 'depth_cm', 'height_cm', 'is_active', 'is_new', 'is_featured',
-    'meta_title', 'meta_description',
+    'sort_order', 'meta_title', 'meta_description',
 ])]
 class Product extends Model implements HasMedia
 {

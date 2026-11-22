@@ -98,7 +98,7 @@
       @endforeach
       <li>
         <a class="cat cat--picks" href="{{ shop_route('picks') }}">
-          <img src="{{ asset('assets/img/demo/picks.webp') }}" alt="" width="640" height="640" loading="lazy" decoding="async">
+          <img src="{{ site_media('home_picks') }}" alt="" width="640" height="640" loading="lazy" decoding="async">
           <span class="cat__seal" aria-hidden="true"><img src="{{ asset('assets/img/brand/emblem-cream.png') }}" alt="" width="56" height="56" loading="lazy"></span>
           <span class="cat__info">
             <span class="cat__name">{{ __('shop.nav.picks') }}</span>
@@ -109,7 +109,7 @@
     </ul>
 
     <a class="projects" href="{{ whatsapp_url(__('shop.whatsapp.projects')) }}" target="_blank" rel="noopener noreferrer">
-      <img class="projects__img" src="{{ asset('assets/img/demo/projects-wide.webp') }}" alt="" width="1200" height="700" loading="lazy" decoding="async">
+      <img class="projects__img" src="{{ site_media('home_projects') }}" alt="" width="1200" height="700" loading="lazy" decoding="async">
       <span class="projects__body">
         <span class="eyebrow eyebrow--light">{{ __('shop.projects.eyebrow') }}</span>
         <span class="projects__title">{{ __('shop.projects.title') }}</span>
@@ -151,7 +151,7 @@
 
   <section class="story wrap" aria-labelledby="story-title">
     <figure class="story__media">
-      <img src="{{ asset('assets/img/demo/story.webp') }}" alt="" width="1100" height="900" loading="lazy" decoding="async">
+      <img src="{{ site_media('home_story') }}" alt="" width="1100" height="900" loading="lazy" decoding="async">
       <img class="story__seal" src="{{ asset('assets/img/brand/emblem-walnut.png') }}" alt="" width="120" height="120" loading="lazy">
     </figure>
     <div class="story__text">

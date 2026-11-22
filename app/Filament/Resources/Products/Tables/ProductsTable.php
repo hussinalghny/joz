@@ -35,6 +35,11 @@ class ProductsTable
             ->modifyQueryUsing(fn (Builder $query) => $query->with(['category', 'variants', 'media']))
             ->stackedOnMobile()
             ->defaultSort('created_at', 'desc')
+            ->reorderable('sort_order')
+            ->reorderRecordsTriggerAction(fn (Action $action, bool $isReordering) => $action
+                ->button()
+                ->label($isReordering ? __('admin.product_order.done') : __('admin.product_order.start'))
+                ->tooltip(__('admin.product_order.hint')))
             ->columns([
                 SpatieMediaLibraryImageColumn::make('gallery')
                     ->label(__('admin.product.image'))

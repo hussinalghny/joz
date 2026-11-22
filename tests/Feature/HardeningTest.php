@@ -235,7 +235,7 @@ describe('uploads waiting to be validated', function () {
             ->and(config('filesystems.disks.local.root'))->not->toContain('public');
     });
 
-    it('must be images from the moment they arrive', function (string $file, bool $allowed) {
+    it('must be images or web videos from the moment they arrive', function (string $file, bool $allowed) {
         $validator = Validator::make(
             ['upload' => UploadedFile::fake()->create($file, 10)],
             ['upload' => config('livewire.temporary_file_upload.rules')],
@@ -248,8 +248,11 @@ describe('uploads waiting to be validated', function () {
         ['run.exe', false],
         ['page.html', false],
         ['drawing.svg', false],
+        ['clip.mov', false],
         ['photo.jpg', true],
         ['photo.webp', true],
+        ['clip.mp4', true],
+        ['clip.webm', true],
     ]);
 
     it('keeps the rest of the Livewire settings', function () {

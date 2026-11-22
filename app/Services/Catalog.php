@@ -38,6 +38,18 @@ class Catalog
     }
 
     /**
+     * In the order the owner arranged in the admin. Products never placed share
+     * position 0 and come first, newest first, so a new piece shows up at the top
+     * until the owner moves it.
+     *
+     * @return Builder<Product>
+     */
+    private function curated(): Builder
+    {
+        return Product::query()->visible()->with('variants')->orderBy('sort_order')->latest()->orderByDesc('id');
+    }
+
+    /**
      * Top-level sections for the home page, each with its visible product count
      * including sub-sections.
      *
@@ -61,7 +73,7 @@ class Catalog
      */
     public function inCategory(Category $category): Collection
     {
-        return $this->query()
+        return $this->curated()
             ->whereIn('category_id', [$category->id, ...$category->descendantIds()])
             ->get();
     }
@@ -81,7 +93,7 @@ class Catalog
      */
     public function featured(?int $limit = null): Collection
     {
-        return $this->query()->where('is_featured', true)->limit($limit)->get();
+        return $this->curated()->where('is_featured', true)->limit($limit)->get();
     }
 
     /**
@@ -180,7 +192,7 @@ class Catalog
      */
     public function related(Product $product, int $limit = 4): Collection
     {
-        return $this->query()
+        return $this->curated()
             ->where('category_id', $product->category_id)
             ->whereKeyNot($product->id)
             ->limit($limit)
@@ -213,6 +225,7 @@ class Catalog
             CatalogFilters::SORT_PRICE_ASC => $products->sortBy(fn (Product $product) => $this->prices->finalPrice($product))->values(),
             CatalogFilters::SORT_PRICE_DESC => $products->sortByDesc(fn (Product $product) => $this->prices->finalPrice($product))->values(),
             CatalogFilters::SORT_BEST_SELLING => $this->sortByBestSelling($products),
+            CatalogFilters::SORT_NEWEST => $products->sortBy([['created_at', 'desc'], ['id', 'desc']])->values(),
             default => $products,
         };
     }

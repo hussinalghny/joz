@@ -43,7 +43,7 @@
     <details class="filters" data-filters @if ($filters->isActive()) open @endif>
       <summary class="filters__toggle"><x-ico name="tag" />{{ __('shop.listing.filters') }}</summary>
       <form class="filters__form" method="get" action="{{ url()->current() }}">
-        @if ($filters->sort !== \App\Support\CatalogFilters::SORT_NEWEST)
+        @if ($filters->sort !== \App\Support\CatalogFilters::SORT_FEATURED)
           <input type="hidden" name="sort" value="{{ $filters->sort }}">
         @endif
 

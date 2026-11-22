@@ -199,6 +199,7 @@ return [
         'apply' => 'Apply',
         'clear' => 'Clear all',
         'sort' => 'Sort by',
+        'sort_featured' => 'Our pick',
         'sort_newest' => 'Newest',
         'sort_price_asc' => 'Price: low to high',
         'sort_price_desc' => 'Price: high to low',

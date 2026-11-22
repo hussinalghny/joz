@@ -9,12 +9,16 @@ use App\Models\Page;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use App\Support\SiteContent;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -94,6 +98,45 @@ class PageResource extends Resource
                 ->label(__('admin.page.body_en'))
                 ->toolbarButtons(self::TOOLBAR)
                 ->columnSpanFull(),
+            Section::make(__('admin.page_video.section'))
+                ->description(__('admin.page_video.section_hint'))
+                ->columns(2)
+                ->columnSpanFull()
+                ->collapsible()
+                ->schema([
+                    FileUpload::make('video_path')
+                        ->label(__('admin.page_video.video'))
+                        ->helperText(__('admin.page_video.video_hint', ['size' => intdiv(SiteContent::VIDEO_MAX_KB, 1024)]))
+                        ->disk('public')
+                        ->directory(Page::VIDEO_DIRECTORY)
+                        ->visibility('public')
+                        ->acceptedFileTypes(SiteContent::VIDEO_TYPES)
+                        ->maxSize(SiteContent::VIDEO_MAX_KB)
+                        ->openable()
+                        ->columnSpanFull(),
+                    FileUpload::make('video_poster_path')
+                        ->label(__('admin.page_video.poster'))
+                        ->helperText(__('admin.page_video.poster_hint'))
+                        ->disk('public')
+                        ->directory(Page::VIDEO_DIRECTORY)
+                        ->visibility('public')
+                        ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                        ->imageResizeMode('contain')
+                        ->imageResizeTargetWidth('1920')
+                        ->imageResizeTargetHeight('1920')
+                        ->imageResizeUpscale(false)
+                        ->maxSize(SiteContent::IMAGE_MAX_KB),
+                    Select::make('video_position')
+                        ->label(__('admin.page_video.position'))
+                        ->options([
+                            Page::VIDEO_TOP => __('admin.page_video.position_top'),
+                            Page::VIDEO_BOTTOM => __('admin.page_video.position_bottom'),
+                        ])
+                        ->default(Page::VIDEO_TOP)
+                        ->required()
+                        ->native(false),
+                ]),
             Textarea::make('meta_description')
                 ->label(__('admin.product.meta_description'))
                 ->rows(2)
